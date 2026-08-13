@@ -1,0 +1,19 @@
+COSC726 Week 2 Lab 1 - Completed Observations
+
+1. Tokenization
+The Arabic input is the most expensive in this teaching tokenizer, at 35 tokens with both teach-A and teach-B. The toy vocabularies contain no Arabic subword tokens, so Arabic characters are mostly counted individually. Token cost is tokenizer-specific, so every count should include tokenizer name/version and exact input text.
+
+2. Context budgeting
+It would be unsafe to silently drop the user's message containing the order ID and credit request because the agent could lose information needed to answer correctly or perform an account action. Dropped items must be explicitly logged, and the system message must be retained.
+
+3. Sampling
+Low temperature, preferably 0, is safer for ORDER-ID extraction because structured identifiers require consistency and repeatability. The choice should be justified using extraction accuracy, invalid-ID rate, and repeatability, not personal preference.
+
+4. State
+The ConversationManager is the application component responsible for retaining and reconstructing conversation history. The application layer therefore controls retention, deletion, and privacy policies for that state.
+
+5. Grounding
+Only the grounded response can safely drive an action because it contains supporting evidence: policy-late-delivery-v3. The abstaining response is safe because it refuses to act without evidence; the ungrounded response is unsafe.
+
+6. Telemetry
+usage is needed to estimate cost; request_id identifies the specific model call for tracing/reproduction; evidence_ids identifies the supporting evidence for audit. Full production reproduction would also require model/context/request details.
